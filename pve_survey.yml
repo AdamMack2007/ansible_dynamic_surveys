@@ -3,17 +3,18 @@
   gather_facts: no
 
   tasks:
-    - name: Get Proxmox Containers Lists
+    - name: Get Available Templates
       uri:
-        url: "https://{{ansible_host}}:8006/api2/json/nodes/proxmox/lxc"
+        url: "https://{{ansible_host}}:8006/api2/json/nodes/localhost/storage/local/content"
         method: GET
+        status_code: 200
+        validate_certs: no
         headers:
           Cookie: "PVEAuthCookie={{ pve_cookie }}"
           CSRFPreventionToken: "{{ pve_csrf_token }}"
-        status_code: 200
-        validate_certs: no
+      register: pve_templates
       delegate_to: localhost
-      register: containers_list
+
      
     - name: Create PVE Survey Spec 
       uri:
