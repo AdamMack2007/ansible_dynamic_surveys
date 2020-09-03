@@ -1,5 +1,5 @@
 # ansible_dynamic_surveys
-Example dynamic survey playbook and template for Ansible Tower.
+This is a quick and dirty example of a dynamic survey playbook for Ansible Tower.
 
 # Notes
 When talking to the Tower API you'll need to reference the ID of the object. 
