@@ -1,0 +1,65 @@
+{
+    "name": "",
+    "description": "",
+    "spec": [
+        {
+            "question_name": "Server Name",
+            "question_description": "",
+            "required": true,
+            "type": "text",
+            "variable": "pve_server_name",
+            "min": 0,
+            "max": 1024,
+            "default": "",
+            "choices": "",
+            "new_question": true
+        },
+        {
+            "question_name": "Server IP",
+            "question_description": "IP of server, none will auto assign",
+            "required": false,
+            "type": "text",
+            "variable": "pve_ip",
+            "min": 0,
+            "max": 1024,
+            "default": "",
+            "choices": "",
+            "new_question": true
+        },
+        {
+            "question_name": "Server Memory",
+            "question_description": "Amount of RAM to allocate",
+            "required": false,
+            "type": "multiplechoice",
+            "variable": "pve_server_memory",
+            "min": null,
+            "max": null,
+            "default": "512",
+            "choices": "512\n1024\n2048\n4096",
+            "new_question": true
+        },
+        {
+            "question_name": "Server CPU",
+            "question_description": "Amount of CPU Cores to allocate",
+            "required": false,
+            "type": "multiplechoice",
+            "variable": "pve_server_cpu",
+            "min": null,
+            "max": null,
+            "default": "1",
+            "choices": "1\n2\n3\n4",
+            "new_question": true
+        },
+        {
+            "question_name": "Choose Server Template",
+            "question_description": "",
+            "required": true,
+            "type": "multiplechoice",
+            "variable": "pve_template",
+            "min": null,
+            "max": null,
+            "default": "",
+            "choices":"{% for item in pve_templates['json']['data'] %}{{item['volid']}}{% if not loop.last %}\n{% endif %}{% endfor %}"
+        }
+    ]
+}
