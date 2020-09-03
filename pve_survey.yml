@@ -1,0 +1,29 @@
+- hosts: all
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Get Proxmox Containers Lists
+      uri:
+        url: "https://{{ansible_host}}:8006/api2/json/nodes/proxmox/lxc"
+        method: GET
+        headers:
+          Cookie: "PVEAuthCookie={{ pve_cookie }}"
+          CSRFPreventionToken: "{{ pve_csrf_token }}"
+        status_code: 200
+        validate_certs: no
+      delegate_to: localhost
+      register: containers_list
+     
+    - name: Create PVE Survey Spec 
+      uri:
+        url: "https://ansibletower.company.com/api/v2/job_templates/16/survey_spec/"
+        user: "{{ api_user }}"
+        password: "{{ api_password }}"
+        force_basic_auth: yes
+        method: POST
+        body: "{{ lookup('template','templates/survey.j2') }}"
+        body_format: json
+        status_code: 200
+        validate_certs: no
+      delegate_to: localhost
